@@ -23,7 +23,7 @@ void process::start_process(bool Install, bool Pack, std::string Config,
   std::thread{std::bind(&process::timer, this, Time)}.detach();
   bool success;
   auto task = async::spawn([this, &success, &Config] {
-    success = my_task( "-H. -B_builds -DCMAKE_INSTALL_PREFIX=_install "
+    success = my_task("-H. -B_builds -DCMAKE_INSTALL_PREFIX=_install "
         "-DCMAKE_BUILD_TYPE=" + Config);
   });
   task.wait();
@@ -100,3 +100,4 @@ void process::timer(int time)
 }
 
 process::~process() {}
+

@@ -1,7 +1,7 @@
 // Copyright 2020 Your Name <your_email>
 
-#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
+#ifndef INCLUDE_PROCESS_BUILDER_HPP_
+#define INCLUDE_PROCESS_BUILDER_HPP_
 #include <iostream>
 #include <string>
 
@@ -23,4 +23,4 @@ class process
  private:
   boost::process::child new_child;
 };
-#endif // INCLUDE_HEADER_HPP_
+#endif // INCLUDE_PROCESS_BUILDER_HPP_
