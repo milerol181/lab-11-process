@@ -29,23 +29,38 @@ void process::start_process(bool Install, bool Pack, std::string Config,
   task.wait();
   if (!success)
     return;
+  task = async::spawn([this, &success]{
   success = my_task("--build _builds");
+  });
+  task.wait();
   if (!success)
     return;
   if (Install&&Pack)
   {
-    success = my_task("--build _builds --target install");
+    task = async::spawn([this, &success]{
+      success = my_task("--build _builds --target install");
+    });
+    task.wait();
     if (!success)
       return;
-    success = my_task("--build _builds --target package");
+    task = async::spawn([this, &success]{
+      success = my_task("--build _builds --target package");
+    });
+    task.wait();
     if (!success)
       return;
   } else if (Install) {
-    success = my_task("--build _builds --target install");
+    task = async::spawn([this, &success]{
+      success = my_task("--build _builds --target install");
+    });
+    task.wait();
     if (!success)
       return;
   } else if (Pack) {
-    success = my_task("--build _builds --target package");
+    task = async::spawn([this, &success] {
+      success = my_task("--build _builds --target package");
+    });
+    task.wait();
     if (!success)
       return;
   }
